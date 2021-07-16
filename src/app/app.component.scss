@@ -1,0 +1,21 @@
+$gutterWidth: 16px;
+$tablet-breakpoint: 768px;
+
+// Positioning
+@mixin center-block {
+    margin: 0 auto;
+}
+
+.container {
+    padding-right: $gutterWidth;
+    padding-left: $gutterWidth;
+}
+
+@media (min-width: $tablet-breakpoint) {
+    .container {
+      max-width: $tablet-breakpoint - ($gutterWidth * 2);
+      padding-right: $gutterWidth / 2;
+      padding-left: $gutterWidth / 2;
+      @include center-block();
+    }
+}
