@@ -1,24 +1,116 @@
 <div class="home">
-    <section>
-        <div>
-            <h2>Recipients Lists</h2>
+  <section>
+    <div>
+      <h2>Recipients Lists</h2>
+      <nz-checkbox-group class="home__check-group" [(ngModel)]="checkOptions"></nz-checkbox-group>
+    </div>
+    <div class="home__email-recipient">
+      <h2>Search Recipients</h2>
+      <div class="example-input">
+        <nz-input-group nzSize="large" [nzSuffix]="suffixIcon">
+          <input
+            placeholder="search company/e-mail"
+            nz-input
+            [(ngModel)]="inputValue"
+            (ngModelChange)="onChange($event)"
+            [nzAutocomplete]="auto"
+            (keyup.enter)="onSubmit()"
+          />
+        </nz-input-group>
+        <ng-template #suffixIcon>
+          <i nz-icon nzType="search"></i>
+        </ng-template>
+        <nz-autocomplete
+          [nzDataSource]="filteredOptions"
+          #auto
+        ></nz-autocomplete>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div>
+      <h2 class="h">Selected Recipients({{ totalSelected() }})</h2>
+      <div>
+        <h3>Companies</h3>
+        <div role="list">
+          <div
+            *ngFor="let company of selectedCompanies"
+            role="listitem"
+            class="flat-item"
+          >
+            <div>{{ company }}</div>
+            <button
+              nz-button
+              nzType="default"
+              nzSize="small"
+              (click)="removeCompany(company)"
+            >
+              <i nz-icon nzType="close" nzTheme="outline"></i>
+            </button>
+          </div>
         </div>
-        <div>
-            <h2>Search Recipients</h2>
-            <input type="text" placeholder="search company/email">
-        </div>
-    </section>
-    <section>
-        <div>
-            <h2>Selected Recipients</h2>
-            <div>
-                <h3>Companies</h3>
-                <div>Company X</div>
+      </div>
+      <div class="home__email-recipient">
+        <h3>Emails</h3>
+        <div role="list">
+          <div *ngFor="let email of selectedEmailRecipients">
+            <div role="listitem">
+              <div class="home__email-recipient__top">
+                <div
+                  class="home__email-recipient__title"
+                  (click)="email.active = !email.active"
+                >
+                  <div>
+                    {{
+                      email.recipients.length > 1
+                        ? email.domain
+                        : email.recipients[0]
+                    }}
+                  </div>
+                  <i
+                    *ngIf="email.recipients.length > 1"
+                    class="home__email-recipient__title__icon"
+                    nz-icon
+                    nzType="down"
+                    nzTheme="outline"
+                  ></i>
+                </div>
+                <button
+                  *ngIf="email.recipients.length"
+                  nz-button
+                  nzType="default"
+                  nzSize="small"
+                  (click)="removeRecipientGroup(email)"
+                >
+                  <i nz-icon nzType="close" nzTheme="outline"></i>
+                </button>
+              </div>
+              <div
+                *ngIf="email.recipients.length > 1 && email.active"
+                class="home__email-recipient__bottom"
+              >
+                <div role="list">
+                  <div
+                    *ngFor="let recipient of email.recipients"
+                    role="listitem"
+                    class="flat-item"
+                  >
+                    <div>{{ recipient }}</div>
+                    <button
+                      nz-button
+                      nzType="default"
+                      nzSize="small"
+                      (click)="removeRecipient(email.domain, recipient)"
+                    >
+                      <i nz-icon nzType="close" nzTheme="outline"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-                <h3>Emails</h3>
-                <div>@enmacc.de X</div>
-            </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </div>
