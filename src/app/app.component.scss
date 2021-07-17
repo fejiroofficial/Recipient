@@ -1,5 +1,6 @@
 $gutterWidth: 16px;
 $tablet-breakpoint: 768px;
+$laptop-breakpoint: 1184px;
 
 // Positioning
 @mixin center-block {
@@ -16,6 +17,13 @@ $tablet-breakpoint: 768px;
       max-width: $tablet-breakpoint - ($gutterWidth * 2);
       padding-right: $gutterWidth / 2;
       padding-left: $gutterWidth / 2;
+      @include center-block();
+    }
+}
+
+@media (min-width: $laptop-breakpoint) {
+    .container {
+      max-width: $laptop-breakpoint - ($gutterWidth * 2);
       @include center-block();
     }
 }

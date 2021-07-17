@@ -90,9 +90,9 @@ export class HomeComponent implements OnInit {
 
   onSubmit(): void {
     if (this.inputValue.includes('@')) {
-       this.emailSubmissionHandler()
+      this.emailSubmissionHandler()
     } else {
-       this.companySubmissionHandler()
+      this.companySubmissionHandler()
     }
   }
 
@@ -112,9 +112,12 @@ export class HomeComponent implements OnInit {
   }
 
   removeRecipientGroup({ domain, recipients }) {
+    // remove domain group recipients
     recipients.forEach(recipient => {
       this.removeRecipient(domain, recipient)
     });
+    // remove domain group
+    this.selectedEmailRecipients = this.selectedEmailRecipients.filter((option: EmailRecipient) => option.domain !== domain)
   }
 
   removeRecipient(domain, recipient) {

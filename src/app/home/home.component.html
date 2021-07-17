@@ -1,5 +1,5 @@
 <div class="home">
-  <section>
+  <section class="home__section-a">
     <div>
       <h2>Recipients Lists</h2>
       <nz-checkbox-group class="home__check-group" [(ngModel)]="checkOptions"></nz-checkbox-group>
@@ -27,10 +27,10 @@
       </div>
     </div>
   </section>
-  <section>
+  <section class="home__section-b">
     <div>
-      <h2 class="h">Selected Recipients({{ totalSelected() }})</h2>
-      <div>
+      <h2>Selected Recipients({{ totalSelected() }})</h2>
+      <div *ngIf="selectedCompanies.length">
         <h3>Companies</h3>
         <div role="list">
           <div
@@ -50,7 +50,7 @@
           </div>
         </div>
       </div>
-      <div class="home__email-recipient">
+      <div *ngIf="selectedEmailRecipients.length" class="home__email-recipient">
         <h3>Emails</h3>
         <div role="list">
           <div *ngFor="let email of selectedEmailRecipients">
