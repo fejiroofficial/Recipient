@@ -1,4 +1,4 @@
-# Enmacc Recipient List Task
+# Recipient List
 
 This project serves as a little framework to support you with your technical exercise. Please make
 sure that you've read the task properly before starting and ask questions if anything should be unclear.
